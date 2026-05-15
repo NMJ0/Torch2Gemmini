@@ -56,3 +56,9 @@ pip install -r requirements.txt
  ninja
  ninja check-buddy
 ```
+## set up torch-mlir
+```bash
+chmod +x
+./
+```
+
