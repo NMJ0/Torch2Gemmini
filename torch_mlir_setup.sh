@@ -33,7 +33,7 @@ python -m pip install --upgrade pip
 # ─── 2. Clone torch-mlir + submodules ────────────────────────────────────────
 # Clone into current directory (no cd ~)
 echo ">>> Cloning torch-mlir into $(pwd)/torch-mlir ..."
-git clone https://github.com/llvm/torch-mlir
+git clone https://github.com/NMJ0/torch-mlir.git
 cd torch-mlir
 TORCH_MLIR_DIR=$(pwd)   # save absolute path for later
 
