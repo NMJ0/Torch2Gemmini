@@ -58,7 +58,7 @@ pip install -r requirements.txt
 ```
 ## set up torch-mlir
 ```bash
-chmod +x
-./
+chmod +x torch_mlir_setup.sh
+./torch_mlir_setup.sh
 ```
 
