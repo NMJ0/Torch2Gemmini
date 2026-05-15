@@ -1,5 +1,9 @@
 #!/bin/bash
-
+# =============================================================================
+# torch-mlir from-source setup in conda env "nmj0"
+# Based on: https://github.com/llvm/torch-mlir/blob/main/docs/development.md
+# Tested on: Ubuntu 22.04 / 24.04
+# =============================================================================
 set -e  # exit on any error
 
 # ─── 0. System dependencies ──────────────────────────────────────────────────
@@ -17,20 +21,21 @@ sudo apt install -y \
     build-essential
 
 # ─── 1. Create & activate conda env ──────────────────────────────────────────
-echo ">>> Creating conda env 'nmj' with Python 3.11..."
-conda create -n nmj python=3.11 -y
+echo ">>> Creating conda env 'nmj0' with Python 3.11..."
+conda create -n nmj0 python=3.11 -y
 
 CONDA_BASE=$(conda info --base)
 source "$CONDA_BASE/etc/profile.d/conda.sh"
-conda activate nmj
+conda activate nmj0
 
 python -m pip install --upgrade pip
 
 # ─── 2. Clone torch-mlir + submodules ────────────────────────────────────────
-echo ">>> Cloning torch-mlir..."
-cd ~
-git clone https://github.com/NMJ0/torch-mlir.git
+# Clone into current directory (no cd ~)
+echo ">>> Cloning torch-mlir into $(pwd)/torch-mlir ..."
+git clone https://github.com/llvm/torch-mlir
 cd torch-mlir
+TORCH_MLIR_DIR=$(pwd)   # save absolute path for later
 
 echo ">>> Initializing submodules (this will take a while)..."
 git submodule update --init --depth=1 --progress
@@ -50,7 +55,7 @@ cmake -GNinja -Bbuild \
     -DLLVM_TARGETS_TO_BUILD=host \
     -DLLVM_ENABLE_PROJECTS=mlir \
     -DLLVM_EXTERNAL_PROJECTS="torch-mlir" \
-    -DLLVM_EXTERNAL_TORCH_MLIR_SOURCE_DIR="$PWD" \
+    -DLLVM_EXTERNAL_TORCH_MLIR_SOURCE_DIR="$TORCH_MLIR_DIR" \
     -DTORCH_MLIR_ENABLE_PYTORCH_EXTENSIONS=ON \
     -DTORCH_MLIR_ENABLE_JIT_IR_IMPORTER=ON \
     -DCMAKE_C_COMPILER=clang \
@@ -66,15 +71,15 @@ cmake --build build
 
 # ─── 6. Set up PYTHONPATH ────────────────────────────────────────────────────
 echo ">>> Setting up PYTHONPATH..."
-cd ~/torch-mlir
+cd "$TORCH_MLIR_DIR"
 ./build_tools/write_env_file.sh
 source ./.env && export PYTHONPATH
 
 # Persist PYTHONPATH into the conda env so it's set on every `conda activate`
-CONDA_ENV_DIR="$CONDA_BASE/envs/nmj"
+CONDA_ENV_DIR="$CONDA_BASE/envs/nmj0"
 mkdir -p "$CONDA_ENV_DIR/etc/conda/activate.d"
 cat > "$CONDA_ENV_DIR/etc/conda/activate.d/torch_mlir_env.sh" << EOF
-source ~/torch-mlir/.env
+source $TORCH_MLIR_DIR/.env
 export PYTHONPATH
 EOF
 
@@ -91,5 +96,8 @@ print('torch_mlir : OK')
 
 echo ""
 echo "✅ Done! To use this env in future sessions:"
-echo "   conda activate nmj"
+echo "   conda activate nmj0"
 echo ""
+echo "To run the ResNet18 example:"
+echo "   cd $TORCH_MLIR_DIR"
+echo "   python projects/pt1/examples/fximporter_resnet18.py"
