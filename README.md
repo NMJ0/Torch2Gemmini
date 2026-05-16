@@ -9,6 +9,28 @@ git clone https://github.com/NMJ0/chipyard.git
 cd chipyard
 ./build-setup.sh riscv-tools  
 ```
+- if any error related to firtool comes --Steps  to install firtools (this is what worked for me , you can try to set up firtools in your own way)
+
+```bash
+# Step 1: Remove the broken firtool
+rm /home/noel/chipyard/.conda-env/bin/firtool   ## change to your system's path
+
+# Step 2: Download full CIRCT distribution (includes libraries)
+cd /tmp
+rm -rf circt-dist
+mkdir circt-dist && cd circt-dist
+wget -q -O - https://github.com/llvm/circt/releases/download/firtool-1.56.1/circt-full-shared-linux-x64.tar.gz | tar -zx
+
+# Step 3: Copy entire directory to conda environment
+cp -r firtool-1.56.1/* $CONDA_PREFIX/
+
+# Step 4: Verify - check both binary and libraries exist
+ls -la $CONDA_PREFIX/bin/firtool
+ls -la $CONDA_PREFIX/lib/libCIRCT*.so
+
+# Step 5: Test
+firtool --version
+```
 ## Set up buddy-mlir
 - install dependencies
 ```bash
