@@ -1,4 +1,4 @@
-# MLIR-Gemmini
+# Torch2Gemmini
 
 <details>
 <summary><strong>Steps to set up forked CHIPYARD</strong></summary>
