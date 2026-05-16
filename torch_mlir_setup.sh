@@ -95,7 +95,7 @@ print('torch_mlir : OK')
 "
 
 echo ""
-echo "✅ Done! To use this env in future sessions:"
+echo " Done! To use this env in future sessions:"
 echo "   conda activate nmj0"
 echo ""
 
