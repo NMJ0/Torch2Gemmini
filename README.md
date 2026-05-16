@@ -265,7 +265,7 @@ running on spike simulator
 make run-std #cpu only
 make run-gemmini #gemmini
 ```
-running on FPGA
+running on FPGA (Do not forget to click cpu reset button on the FPGA after each run)
 ```bash
 make run-uart-std #cpu only
 make run-uart-gemmini #gemmini
