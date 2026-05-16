@@ -2,7 +2,7 @@
 # =============================================================================
 # torch-mlir from-source setup in conda env "nmj0"
 # Based on: https://github.com/llvm/torch-mlir/blob/main/docs/development.md
-# Tested on: Ubuntu 22.04 / 24.04
+# Tested on: Ubuntu 22.04 
 # =============================================================================
 set -e  # exit on any error
 
@@ -98,6 +98,4 @@ echo ""
 echo "✅ Done! To use this env in future sessions:"
 echo "   conda activate nmj0"
 echo ""
-echo "To run the ResNet18 example:"
-echo "   cd $TORCH_MLIR_DIR"
-echo "   python projects/pt1/examples/fximporter_resnet18.py"
+
