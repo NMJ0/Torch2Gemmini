@@ -1,6 +1,8 @@
 # Torch2Gemmini
 This project provides an end-to-end MLIR-based compilation and acceleration flow that integrates Torch-MLIR, Buddy-MLIR, and Chipyard for running PyTorch workloads on Gemmini accelerator implemented on an FPGA. The pipeline lowers high-level tensor operations from PyTorch through MLIR dialects in Buddy into Gemmini-compatible accelerator code. The repository also includes setup scripts and integration flows required to connect the software stack with the underlying FPGA deployment environment.
-
+```bash
+git clone https://github.com/NMJ0/Torch2Gemmini.git
+```
 <details>
 <summary><strong>Steps to set up forked CHIPYARD</strong></summary>
 
@@ -238,3 +240,37 @@ This program multiplies a matrix with an identity matrix and verifies that the o
 ```
 
 </details>
+
+## Build and compilation flow
+move to the target folder
+```bash
+cd matmul
+```
+To generate MLIR file from torch
+```bash 
+make gen_mlir
+```
+lowering the mlir file 
+```bash
+make lower-std #uses only cpu
+make lower-gemmini #uses gemmini
+```
+linking the object file with the c wrapper 
+```bash
+make link-std  # cpu only
+make link-gemmini  #gemmini
+```
+running on spike simulator
+```bash
+make run-std #cpu only
+make run-gemmini #gemmini
+```
+running on FPGA
+```bash
+make run-uart-std #cpu only
+make run-uart-gemmini #gemmini
+```
+
+
+
+
