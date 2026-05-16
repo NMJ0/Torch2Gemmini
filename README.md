@@ -246,7 +246,7 @@ This program multiplies a matrix with an identity matrix and verifies that the o
 ## Build and compilation flow
 move to the target folder
 ```bash
-cd matmul  ## or mlp mnist
+cd matmul  ## or mlp mnist/Lenet
 ```
 To generate MLIR file from torch
 ```bash 
