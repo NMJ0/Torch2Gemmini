@@ -126,11 +126,11 @@ chmod +x torch_mlir_setup.sh
 </details>
 
 <details>
-<summary><strong>FPGA Programming Guide</strong></summary>
+<summary><strong>FPGA Programming Guide  </strong></summary>
 
 <br>
 
-
+ *For tools such as Vivado, use your own systems path.Paths in my system are used in these instructions.This is only an example; depending on the fpga used, you might need to change some variables.*
 
 ## 1. Enable the Chipyard Environment
 
