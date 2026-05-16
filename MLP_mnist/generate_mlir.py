@@ -1,23 +1,4 @@
-"""
-mlp_inference.py  –  Quantized MLP primitives + MLIR generation.
 
-Supports two modes
-------------------
-1.  Built-in toy example  (4 → 8 → 4, hard-coded weights):
-        python mlp_inference.py
-
-2.  MNIST model produced by train.py:
-        python mlp_inference.py --mnist mnist_quantized.json
-
-Quantization data-flow (per layer)
-------------------------------------
-    scale_acc  = scale_input × scale_weight     (int32 accumulator unit)
-    scale_out  = scale of the next layer's input
-    requant    = scale_acc / scale_out           (int32 → int8 scale factor)
-
-    b_int32  = round( b_float / scale_acc )
-    h_int8   = clamp( round( acc_int32 × requant ), -128, 127 )
-"""
 
 import argparse
 import json
