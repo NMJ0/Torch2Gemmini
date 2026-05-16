@@ -124,3 +124,116 @@ chmod +x torch_mlir_setup.sh
 ```
 
 </details>
+
+<details>
+<summary><strong>FPGA Programming Guide</strong></summary>
+
+<br>
+
+
+
+## 1. Enable the Chipyard Environment
+
+Navigate to the Chipyard directory and enable the environment.
+
+```bash
+(base) noel@sjd:~$ cd chipyard/
+(base) noel@sjd:~/chipyard$ source env.sh 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard$
+```
+
+This activates the Chipyard Conda environment required for building and running tools.
+
+## 2. Enable Vivado 2018 NFS Server
+
+Mount the hardware tools and enable Vivado 2018.
+
+```bash
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard/fpga$ hwmountnfs
+[sudo] password for noel: 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard/fpga$ v18
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard/fpga$ which vivado 
+/home/noel/tools/hw_tools/Vivado/Vivado/2018.3/bin/vivado
+```
+
+This ensures the correct Vivado version is active.
+
+## 3. Generate Bitstream for Rocket + Gemmini 
+
+Generate the FPGA bitstream using the configuration defined in Configs.scala.
+
+```bash
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard/fpga$ make SUB_PROJECT=nexysvideo CONFIG=RocketGemminiNexysVideo10MHzConfig bitstream
+```
+
+The generated bitstream will be placed in the generated-src directory.
+
+## 4. Build ELF Binaries for C Programs
+
+Navigate to the Gemmini software tests and build the binaries.
+
+```bash 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard/generators/gemmini/software/gemmini-rocc-tests$ ./build.sh
+
+```
+
+All C programs are compiled into ELF binaries and stored in the build directory.
+
+## 5. Connect and Program the  FPGA
+
+Steps to program the FPGA:
+
+1. Open Vivado Hardware Manager
+
+2. Connect both:
+
+- UART cable
+
+- FPGA programming cable
+
+3. Click Auto Connect
+
+4. Click Program Device
+
+5. Select the bitstream file from:
+
+/home/noel/chipyard/fpga/generated-src
+
+6. Program the device.
+
+Important: Reset the CPU before running each program.(There is a CPU Reset button on the FPGA )
+
+## 6. Identify the Connected USB Port
+
+Check which UART port corresponds to the FPGA.
+
+```bash 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard$ ls /dev/ttyUSB*
+/dev/ttyUSB0
+```
+
+## 7. Running Programs on the FPGA
+
+- Running Hello World on the Rocket Core
+
+```bash 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard$ ~/chipyard/.conda-env/riscv-tools/bin/uart_tsi   +tty=/dev/ttyUSB0 +baudrate=115200   +selfcheck software/baremetal-ide/build/examples/chipyard-tests/hello.elf
+```
+
+- Running the Gemmini Template Test
+
+This program multiplies a matrix with an identity matrix and verifies that the output matches the input.
+
+```bash 
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard$ ~/chipyard/.conda-env/riscv-tools/bin/uart_tsi   +tty=/dev/ttyUSB0 +baudrate=115200   +selfcheck generators/gemmini/software/gemmini-rocc-tests/build/bareMetalC/template-baremetal
+```
+
+- Running Matrix Addition on Rocket + Gemmini
+
+
+
+```bash
+(/home/noel/chipyard/.conda-env) noel@sjd:~/chipyard$ ~/chipyard/.conda-env/riscv-tools/bin/uart_tsi   +tty=/dev/ttyUSB0 +baudrate=115200   +selfcheck generators/gemmini/software/gemmini-rocc-tests/build/bareMetalC/matrix_add-baremetal
+```
+
+</details>
