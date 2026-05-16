@@ -44,7 +44,7 @@ firtool --version
 
 </details>
 
----
+
 
 <details>
 <summary><strong>Steps to set up forked buddy-mlir</strong></summary>
@@ -111,7 +111,7 @@ ninja check-buddy
 
 </details>
 
----
+
 
 <details>
 <summary><strong>Steps to set up forked torch-mlir</strong></summary>
