@@ -4,7 +4,7 @@ This project provides an end-to-end MLIR-based compilation and acceleration flow
 git clone https://github.com/NMJ0/Torch2Gemmini.git
 ```
 <details>
-<summary><strong>Steps to set up forked CHIPYARD</strong></summary>
+<summary><strong>Steps to set up forked CHIPYARD(https://github.com/NMJ0/chipyard.git)</strong></summary>
 
 <br>
 
@@ -50,7 +50,7 @@ firtool --version
 
 
 <details>
-<summary><strong>Steps to set up forked buddy-mlir</strong></summary>
+<summary><strong>Steps to set up forked buddy-mlir (https://github.com/NMJ0/buddy-mlir.git)</strong></summary>
 
 <br>
 
@@ -117,7 +117,7 @@ ninja check-buddy
 
 
 <details>
-<summary><strong>Steps to set up forked torch-mlir</strong></summary>
+<summary><strong>Steps to set up forked torch-mlir (https://github.com/NMJ0/torch-mlir.git)</strong></summary>
 
 <br>
 
