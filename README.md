@@ -4,12 +4,12 @@
 ```bash
 git clone https://github.com/NMJ0/chipyard.git
 ```
-- build chipyard ecosystem 
+- Build chipyard ecosystem 
 ```bash
 cd chipyard
 ./build-setup.sh riscv-tools  
 ```
-- if any error related to firtool comes --Steps  to install firtools (this is what worked for me , you can try to set up firtools in your own way)
+- If any error related to firtool comes --Steps  to install firtools (this is what worked for me , you can try to set up firtools in your own way)
 
 ```bash
 # Step 1: Remove the broken firtool
@@ -32,12 +32,12 @@ ls -la $CONDA_PREFIX/lib/libCIRCT*.so
 firtool --version
 ```
 ## Set up buddy-mlir
-- install dependencies
+- Install dependencies
 ```bash
 sudo apt install flatbuffers-compiler libflatbuffers-dev libnuma-dev
 ```
 
-- clone and initialize the forked buddy-mlir repo
+- Clone and initialize the forked buddy-mlir repo
 
 ```bash
 git clone https://github.com/NMJ0/buddy-mlir.git
@@ -48,7 +48,7 @@ git submodule update --init llvm
 ```bash
 pip install -r requirements.txt
 ```
-- build and test LLVM
+- Build and test LLVM
 ```bash
  cd buddy-mlir
  mkdir llvm/build
@@ -63,7 +63,7 @@ pip install -r requirements.txt
     -DPython3_EXECUTABLE=$(which python3)
  ninja check-clang check-mlir omp
 ```
-- build BUDDY
+- Build BUDDY
 ```bash
  cd buddy-mlir
  mkdir build
@@ -78,7 +78,7 @@ pip install -r requirements.txt
  ninja
  ninja check-buddy
 ```
-## set up torch-mlir
+## Set up torch-mlir
 ```bash
 chmod +x torch_mlir_setup.sh
 ./torch_mlir_setup.sh
