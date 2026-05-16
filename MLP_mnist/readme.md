@@ -1,6 +1,6 @@
 # MLP MNIST Directory
 
-This folder contains a  MNIST MLP pipeline from training to MLIR lowering and RISC-V/Gemmini execution in an FPGA.
+This folder contains a  MNIST MLP pipeline from training to MLIR lowering and RISC-V/Gemmini execution on an FPGA.
 
 ## Files
 
