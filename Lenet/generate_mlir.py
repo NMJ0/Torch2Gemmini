@@ -1,30 +1,5 @@
 
-"""
-generate_mlir.py  –  LeNet quantized integer primitives + MLIR generation.
 
-Usage
------
-    python generate_mlir.py --lenet lenet_quantized.json
-
-forward() ABI
--------------
-LeNet forward accepts a (batch, 784) int8 tensor and returns a (batch, 10)
-int32 tensor. The reshape to (batch, 1, 28, 28) happens inside the model.
-
-Conv expressed as slice-gather + torch._int_mm
-----------------------------------------------
-To avoid `aten.im2col` (currently unsupported by this torch-mlir backend),
-conv is lowered with explicit spatial slices, then each flattened patch is
-multiplied by the transposed kernel matrix via `torch._int_mm`.
-
-Quantization data-flow (per layer)
-------------------------------------
-    scale_acc  = scale_input × scale_weight     (int32 accumulator unit)
-    scale_out  = scale of the next layer's input
-    requant    = scale_acc / scale_out           (int32 → int8 scale factor)
-    b_int32    = round(b_float / scale_acc)
-    h_int8     = clamp(round(acc_int32 × requant), -128, 127)
-"""
 
 import argparse
 import json
@@ -199,8 +174,7 @@ class Im2ColConvInt8(torch.nn.Module):
             out_padded = torch._int_mm(cols, self.weight_t)
         out = out_padded[:, : self.C_out]
         out_nhwc = out.view(1, self.H_out * self.W_out, self.C_out)
-        # NOTE: bias add is intentionally skipped here due to torch-mlir
-        # crashes on this conv+broadcast path in current builds.
+      
         out = out_nhwc.permute(0, 2, 1).contiguous().view(1, self.C_out, self.H_out, self.W_out)
         return out
 
