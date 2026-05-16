@@ -1,15 +1,25 @@
 # MLIR-Gemmini
-## Set up CHIPYARD
+
+<details>
+<summary><strong>Set up CHIPYARD</strong></summary>
+
+<br>
+
 - Clone the forked chipyard repository 
+
 ```bash
 git clone https://github.com/NMJ0/chipyard.git
 ```
+
 - Build chipyard ecosystem 
+
 ```bash
 cd chipyard
-./build-setup.sh riscv-tools  
+./build-setup.sh riscv-tools
 ```
-- If any error related to firtool comes --Steps  to install firtools (this is what worked for me , you can try to set up firtools in your own way)
+
+- If any error related to firtool comes -- Steps to install firtools  
+(this is what worked for me, you can try to set up firtools in your own way)
 
 ```bash
 # Step 1: Remove the broken firtool
@@ -31,8 +41,18 @@ ls -la $CONDA_PREFIX/lib/libCIRCT*.so
 # Step 5: Test
 firtool --version
 ```
-## Set up buddy-mlir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Set up buddy-mlir</strong></summary>
+
+<br>
+
 - Install dependencies
+
 ```bash
 sudo apt install flatbuffers-compiler libflatbuffers-dev libnuma-dev
 ```
@@ -44,16 +64,21 @@ git clone https://github.com/NMJ0/buddy-mlir.git
 cd buddy-mlir
 git submodule update --init llvm
 ```
+
 - pip install requirements
+
 ```bash
 pip install -r requirements.txt
 ```
+
 - Build and test LLVM
+
 ```bash
- cd buddy-mlir
- mkdir llvm/build
- cd llvm/build
- cmake -G Ninja ../llvm \
+cd buddy-mlir
+mkdir llvm/build
+cd llvm/build
+
+cmake -G Ninja ../llvm \
     -DLLVM_ENABLE_PROJECTS="mlir;clang;openmp" \
     -DLLVM_TARGETS_TO_BUILD="host;RISCV" \
     -DLLVM_ENABLE_ASSERTIONS=ON \
@@ -61,26 +86,41 @@ pip install -r requirements.txt
     -DCMAKE_BUILD_TYPE=RELEASE \
     -DMLIR_ENABLE_BINDINGS_PYTHON=ON \
     -DPython3_EXECUTABLE=$(which python3)
- ninja check-clang check-mlir omp
+
+ninja check-clang check-mlir omp
 ```
+
 - Build BUDDY
+
 ```bash
- cd buddy-mlir
- mkdir build
- cd build
- cmake -G Ninja .. \
+cd buddy-mlir
+mkdir build
+cd build
+
+cmake -G Ninja .. \
     -DMLIR_DIR=$PWD/../llvm/build/lib/cmake/mlir \
     -DLLVM_DIR=$PWD/../llvm/build/lib/cmake/llvm \
     -DLLVM_ENABLE_ASSERTIONS=ON \
     -DCMAKE_BUILD_TYPE=RELEASE \
     -DBUDDY_MLIR_ENABLE_PYTHON_PACKAGES=ON \
     -DPython3_EXECUTABLE=$(which python3)
- ninja
- ninja check-buddy
+
+ninja
+ninja check-buddy
 ```
-## Set up torch-mlir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Set up torch-mlir</strong></summary>
+
+<br>
+
 ```bash
 chmod +x torch_mlir_setup.sh
 ./torch_mlir_setup.sh
 ```
 
+</details>
