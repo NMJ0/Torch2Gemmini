@@ -1,7 +1,7 @@
 # MLIR-Gemmini
 
 <details>
-<summary><strong>Set up CHIPYARD</strong></summary>
+<summary><strong>Steps to set up CHIPYARD</strong></summary>
 
 <br>
 
@@ -47,7 +47,7 @@ firtool --version
 ---
 
 <details>
-<summary><strong>Set up buddy-mlir</strong></summary>
+<summary><strong>Steps to set up buddy-mlir</strong></summary>
 
 <br>
 
@@ -114,7 +114,7 @@ ninja check-buddy
 ---
 
 <details>
-<summary><strong>Set up torch-mlir</strong></summary>
+<summary><strong>Steps to set up torch-mlir</strong></summary>
 
 <br>
 
