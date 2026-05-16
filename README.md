@@ -1,5 +1,5 @@
 # Torch2Gemmini
-This project provides an end-to-end MLIR-based compilation and acceleration flow that integrates Torch-MLIR, Buddy-MLIR, and Gemmini for running PyTorch workloads on Gemmini implemented on an FPGA. The pipeline lowers high-level tensor operations from PyTorch through MLIR dialects into Gemmini-compatible accelerator code, enabling efficient execution on a Gemmini-enabled Chipyard system. The repository also includes setup scripts, build infrastructure, and integration flows required to connect the software stack with the underlying FPGA deployment environment.
+This project provides an end-to-end MLIR-based compilation and acceleration flow that integrates Torch-MLIR, Buddy-MLIR, and Gemmini for running PyTorch workloads on Gemmini implemented on an FPGA. The pipeline lowers high-level tensor operations from PyTorch through MLIR dialects into Gemmini-compatible accelerator code, enabling efficient execution on a Gemmini-enabled Chipyard system. The repository also includes setup scripts and integration flows required to connect the software stack with the underlying FPGA deployment environment.
 
 <details>
 <summary><strong>Steps to set up forked CHIPYARD</strong></summary>
