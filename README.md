@@ -272,9 +272,10 @@ running on FPGA (Do not forget to click cpu reset button on the FPGA after each 
 make run-uart-std #cpu only
 make run-uart-gemmini #gemmini
 ```
-## Report
+## Documentation
 
-Detailed implementation and system design documentation can be found in the project report: [Project Report](./report.pdf)
+- [Project Report](./report.pdf)
+- [Presentation Slides](./slides.pdf)
 
 ## Acknowledgement
 
