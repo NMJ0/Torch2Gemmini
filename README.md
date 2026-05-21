@@ -274,9 +274,7 @@ make run-uart-gemmini #gemmini
 ```
 ## Report
 
-Detailed implementation and system design documentation can be found in the project report:
-
-[Project Report](./report.pdf)
+Detailed implementation and system design documentation can be found in the project report: [Project Report](./report.pdf)
 
 ## Acknowledgement
 
