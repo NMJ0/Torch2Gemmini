@@ -273,6 +273,8 @@ make run-uart-std #cpu only
 make run-uart-gemmini #gemmini
 ```
 
+## Acknowledgement
 
+This work was completed as part of the Undergraduate Research Credit (UGRC) program at IIT Madras under the guidance of Dr.Karthik Sankaranarayanan.
 
 
